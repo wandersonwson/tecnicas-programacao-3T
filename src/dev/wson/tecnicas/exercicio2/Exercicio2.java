@@ -21,26 +21,22 @@ public class Exercicio2 {
         System.out.println("Lista de APROVADOS por gênero:");
         System.out.println("Feminino:");
         alunos.stream()
-            .filter(a -> a.getGenero().equals("F"))
-            .filter(a -> a.getNota() >= 6)
+            .filter(a -> a.getGenero().equals("F") && a.getNota() >= 6)
             .forEach(System.out::println);
         System.out.println("Masculino:");
         alunos.stream()
-            .filter(a -> a.getGenero().equals("M"))
-            .filter(a -> a.getNota() >= 6)
+            .filter(a -> a.getGenero().equals("M") && a.getNota() >= 6)
             .forEach(System.out::println);
     }
     private void listarReprovadosPorGenero() {
         System.out.println("Lista de REPROVADOS por gênero:");
         System.out.println("Feminino:");
         alunos.stream()
-            .filter(a -> a.getGenero().equals("F"))
-            .filter(a -> a.getNota() < 6)
+            .filter(a -> a.getGenero().equals("F") && a.getNota() < 6)
             .forEach(System.out::println);
         System.out.println("Masculino:");
         alunos.stream()
-            .filter(a -> a.getGenero().equals("M"))
-            .filter(a -> a.getNota() < 6)
+            .filter(a -> a.getGenero().equals("M") && a.getNota() < 6)
             .forEach(System.out::println);
     }
     private void calcularMediaPorGenero() {
