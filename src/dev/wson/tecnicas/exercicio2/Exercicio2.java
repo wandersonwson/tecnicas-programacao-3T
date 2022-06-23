@@ -1,7 +1,9 @@
 package dev.wson.tecnicas.exercicio2;
 
 import java.util.List;
+import java.util.Map;
 import java.util.OptionalDouble;
+import java.util.stream.Collectors;
 
 public class Exercicio2 {
     private List<Aluno> alunos;
@@ -15,6 +17,7 @@ public class Exercicio2 {
         calcularMediaPorGenero();
         listarReprovadosPorGenero();
         listarAprovadosPorGenero();
+        listarQuantidadeDeAlunosPorTamanhoDoNome();
         System.out.println("------");
     }
     private void listarAprovadosPorGenero() {
@@ -45,12 +48,12 @@ public class Exercicio2 {
             .filter(a -> a.getGenero().equals("F"))
             .mapToDouble(Aluno::getNota)
             .average();
-        System.out.printf("Feminino: %.1f.%n", mediaFeminina.getAsDouble());
+        System.out.printf("Feminino: %.1f.%n", mediaFeminina.isPresent() ? mediaFeminina.getAsDouble() : 0.0);
         OptionalDouble mediaMasculina = alunos.stream()
             .filter(a -> a.getGenero().equals("M"))
             .mapToDouble(Aluno::getNota)
             .average();
-        System.out.printf("Masculino: %.1f.%n", mediaMasculina.getAsDouble());
+        System.out.printf("Masculino: %.1f.%n", mediaMasculina.isPresent() ? mediaMasculina.getAsDouble() : 0.0);
     }
     private void somarNotasPorGenero() {
         System.out.println("Soma das notas por gênero:");
@@ -64,6 +67,12 @@ public class Exercicio2 {
             .mapToDouble(Aluno::getNota)
             .reduce(0, Double::sum);
         System.out.printf("Masculino: %.1f.%n", somaMasculina);
+    }
+    private void listarQuantidadeDeAlunosPorTamanhoDoNome(){
+        System.out.println("Quantidade de alunos mapeada pelo tamanho do nome:");
+        Map<Integer, Long> quantidadeDeAlunosPorTamanhoDoNome = alunos.stream()
+            .collect(Collectors.groupingBy(a -> a.getNome().length(), Collectors.counting()));
+        quantidadeDeAlunosPorTamanhoDoNome.forEach((k, v) -> System.out.println(k + " letras: " + v));
     }
     private List<Aluno> inserirAlunos() {
         return List.of(
