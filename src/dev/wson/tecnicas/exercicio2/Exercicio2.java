@@ -48,12 +48,12 @@ public class Exercicio2 {
             .filter(a -> a.getGenero().equals("F"))
             .mapToDouble(Aluno::getNota)
             .average();
-        System.out.printf("Feminino: %.1f.%n", mediaFeminina.isPresent() ? mediaFeminina.getAsDouble() : 0.0);
+        System.out.printf("Feminino: %.1f.%n", mediaFeminina.orElse(0));
         OptionalDouble mediaMasculina = alunos.stream()
             .filter(a -> a.getGenero().equals("M"))
             .mapToDouble(Aluno::getNota)
             .average();
-        System.out.printf("Masculino: %.1f.%n", mediaMasculina.isPresent() ? mediaMasculina.getAsDouble() : 0.0);
+        System.out.printf("Masculino: %.1f.%n", mediaMasculina.orElse(0));
     }
     private void somarNotasPorGenero() {
         System.out.println("Soma das notas por gênero:");
